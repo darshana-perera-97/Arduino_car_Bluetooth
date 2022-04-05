@@ -1,27 +1,55 @@
-/* 
- *  Bluetooh Basic: LED ON OFF - Avishkar
- *  Coder - Mayoogh Girish
- *  Website - http://bit.do/Avishkar
- *  Download the App : 
- *  This program lets you to control a LED on pin 13 of arduino using a bluetooth module
- */
-char Incoming_value = 0;                //Variable for storing Incoming_value
-void setup() 
+char Incoming_value = 0;
+bool t = false;
+void setup()
 {
-  Serial.begin(9600);         //Sets the data rate in bits per second (baud) for serial data transmission
-  pinMode(13, OUTPUT);        //Sets digital pin 13 as output pin
+  Serial.begin(9600);
+  pinMode(3, OUTPUT);
+  pinMode(4, OUTPUT);
+  pinMode(5, OUTPUT);
+  pinMode(6, OUTPUT);
+  pinMode(7, OUTPUT);
+  
 }
 void loop()
 {
-  if(Serial.available() > 0)  
+  if (Serial.available() > 0)
   {
-    Incoming_value = Serial.read();      //Read the incoming data and store it into variable Incoming_value
-    Serial.print(Incoming_value);        //Print Value of Incoming_value in Serial monitor
-    Serial.print("\n");        //New line 
-    if(Incoming_value == '1')            //Checks whether value of Incoming_value is equal to 1 
-      digitalWrite(13, HIGH);  //If value is 1 then LED turns ON
-    else if(Incoming_value == '0')       //Checks whether value of Incoming_value is equal to 0
-      digitalWrite(13, LOW);   //If value is 0 then LED turns OFF
-  }                            
- 
-}       
+    Incoming_value = Serial.read();
+    Serial.print(Incoming_value);
+    Serial.print("\n");
+    if (Incoming_value == '1') {
+      digitalWrite(3, HIGH);
+      digitalWrite(4, LOW);
+      digitalWrite(5, HIGH);
+      digitalWrite(6, LOW);
+    }
+    else if (Incoming_value == '2') {
+      digitalWrite(3, LOW);
+      digitalWrite(4, HIGH);
+      digitalWrite(5, LOW);
+      digitalWrite(6, HIGH);
+    }
+    else if (Incoming_value == '3') {
+      digitalWrite(3, LOW);
+      digitalWrite(4, HIGH);
+      digitalWrite(5, HIGH);
+      digitalWrite(6, LOW);
+    }
+    else if (Incoming_value == '4') {
+      digitalWrite(3, HIGH);
+      digitalWrite(4, LOW);
+      digitalWrite(5, LOW);
+      digitalWrite(6, HIGH);
+    }
+    else if(Incoming_value == '0') {
+      digitalWrite(3, LOW);
+      digitalWrite(4, LOW);
+      digitalWrite(5, LOW);
+      digitalWrite(6, LOW);
+    }
+    if (Incoming_value == '5') {
+      digitalWrite(7, !t);
+    }
+  }
+
+}
